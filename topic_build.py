@@ -24,8 +24,8 @@ class topic(object):
         tokens = [comment.words for comment in comments]
         #Uniform the words as lower case and stems for the words in each token and remove stopwords
         tokens = [[self.porter.stem(word.lower()) for word in sentence if word.lower() not in self.stop] for sentence in tokens]
-
         self.dictionary = corpora.Dictionary(tokens)
+
         #Remove any words appearing less than 10 times
         self.dictionary.filter_extremes(no_below=10)
 

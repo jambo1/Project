@@ -34,7 +34,7 @@ print("Reading file")
 
 #These are the smaller files
 sarcComments = GetTexts.read_sarc_file("Sarc Set.csv")
-negComments = GetTexts.read_sarc_file("Non Sarc Set.csv")
+negComments = GetTexts.read_neg_file("Non Sarc Set.csv")
 
 ##Uncomment the following when the desired data is already in the system
 #sarcComments = np.load("sarccoms.npy")
@@ -81,38 +81,17 @@ print(featuresets)
 print(featuresets.shape)
 
 print("Setting targets")
-labels = (featuresets[0::, 1] == 'Sarcastic').astype(int)
+labels = (featuresets[0::,1] == 'Sarcastic').astype(int)
 
 #Turn NP array into a DictVectorizer, then save it
 print ("Making vect dict")
 vec = DictVectorizer()
-
-#If using a different dataset should this be changed or remain the same or be added to?
-try:
-    featurevec = pickle.load("vectordict.p")
-except:
-    featurevec = vec.fit_transform(featuresets[0::,0])
-    print("Saving vect dict")
-    file_Name = "vectordict.p"
-    fileObject = open(file_Name, 'wb')
-    pickle.dump(vec, fileObject)
-    fileObject.close()
-
-##How to make this work? Would be beneficial for choosing model and features
-# #Visualise the data
-# pandasets = pd.DataFrame(featurevec)
-# print(pandasets.describe())
-# print(pandasets.head(20))
-#
-# pandasets.plot(kind = 'box', subplots=True, layout=(2,2),sharex=False,sharey=False)
-# plt.show()
-# #histograms
-# pandasets.hist()
-# plt.show()
-# #Multivariates, scatter plot matrix
-# scatter_matrix(pandasets)
-# plt.show()
-
+featurevec = vec.fit_transform(featuresets[0::,0])
+print("Saving vect dict")
+file_Name = "vectordict.p"
+fileObject = open(file_Name, 'wb')
+pickle.dump(vec, fileObject)
+fileObject.close()
 
 print("Splitting the featuresets into training and testing")
 order=shuffle(range(len(featuresets)))
@@ -124,63 +103,25 @@ size = int(len(featuresets) * .3) # 30% is used for the test set
 
 print("Setting training and test targets and vectors")
 trainvec = featurevec[size:,0::]
-train_labels = labels[size:]
+train_targets = labels[size:]
 testvec = featurevec[:size,0::]
-test_labels = labels[:size]
-
-# ##From Machine Learning Mastery, does not work but would be good for choosing model
-# #Test options and evaluation metric
-# #random seed number does not matter
-# seed=7
-# #accuracy will be the number predicted correctly out of the total predictions as a percentage. The scoring variable will be used in running and building models
-# scoring = 'accuracy'
-#
-# models = []
-# models.append(('LR', LogisticRegression()))
-# models.append(('LDA', LinearDiscriminantAnalysis()))
-# models.append(('KNN', KNeighborsClassifier()))
-# models.append(('CART', DecisionTreeClassifier()))
-# models.append(('NB', GaussianNB()))
-# models.append(('SVM', SVC()))
-#
-# #evaluate the models
-# results = []
-# names = []
-# #Artificial weights
-# pos_p=(train_labels==1)
-# neg_p=(train_labels==0)
-# ratio = np.sum(neg_p.astype(float))/np.sum(pos_p.astype(float))
-# new_trainvec=trainvec
-# new_train_labels=train_labels
-#
-# for j in range(int(ratio-1.0)):
-#     new_trainvec=sp.sparse.vstack([new_trainvec,trainvec[pos_p,0::]])
-#     new_train_labels=np.concatenate((new_train_labels,train_labels[pos_p]))
-#
-# for name,model in models:
-#     kfold = model_selection.KFold(n_splits=10, random_state=seed)
-#     cv_results = model_selection.cross_val_score(model, new_trainvec, new_train_labels, cv=kfold, scoring=scoring)
-#     results.append(cv_results)
-#     names.append(name)
-#     msg = "%s: %f (%f)" %(name, cv_results.mean(), cv_results.std())
-#     print(msg)
-
+test_targets = labels[:size]
 
 #The following works with above 60% accuracy
 print("Set the training data")
 #Artificial weights
-pos_p=(train_labels==1)
-neg_p=(train_labels==0)
+pos_p=(train_targets==1)
+neg_p=(train_targets==0)
 ratio = np.sum(neg_p.astype(float))/np.sum(pos_p.astype(float))
 new_trainvec = trainvec
-new_train_labels=train_labels
+new_train_targets=train_targets
 for j in range(int(ratio-1.0)):
     new_trainvec=sp.sparse.vstack([new_trainvec,trainvec[pos_p,0::]])
-    new_train_labels=np.concatenate((new_train_labels, train_labels[pos_p]))
+    new_train_targets=np.concatenate((new_train_targets, train_targets[pos_p]))
 
 print("Fit the classifier")
 classifier = SVC(C=0.1,kernel='linear')
-classifier.fit(new_trainvec, new_train_labels)
+classifier.fit(new_trainvec,new_train_targets)
 
 print("Saving the classifier")
 #Saving the classifier
@@ -192,6 +133,6 @@ fileObject.close()
 print ('Validating')
 
 output = classifier.predict(testvec)
-clfreport = classification_report(test_labels, output, labels_names=cls_set)
+clfreport = classification_report(test_targets, output, targets_names=cls_set)
 print (clfreport)
-print(accuracy_score(test_labels, output)*100)
+print(accuracy_score(test_targets, output)*100)
