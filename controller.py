@@ -26,10 +26,10 @@ cls_set = ['Non-Sarcastic', 'Sarcastic']
 featuresets = []
 
 for com in sarcComments:
-    featuresets.append((feature_extract.getallfeatureset(com, topic_mod), cls_set[1]))
+    featuresets.append((feature_extract.getallfeatureset(com.text, topic_mod), cls_set[1]))
 
 for com in negComments:
-    featuresets.append((feature_extract.getallfeatureset(com, topic_mod), cls_set[0]))
+    featuresets.append((feature_extract.getallfeatureset(com.text, topic_mod), cls_set[0]))
 
 featuresets = np.array(featuresets)
 targets = (featuresets[0::, 1] == 'Sarcastic').astype(int)

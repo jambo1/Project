@@ -1,28 +1,15 @@
+from ProjectV2.comment import Comment
 import ProjectV2.get_texts as GetTexts
 import ProjectV2.topic_build as Topical
 import numpy as np
 import ProjectV2.feature_extract as feature_extract
 import scipy as sp
-from sklearn.utils import shuffle
-from sklearn.svm import LinearSVC
-from sklearn.metrics import classification_report
-from sklearn.feature_extraction import DictVectorizer
 import pickle
-import pandas as pd
-from pandas.plotting import scatter_matrix
-import matplotlib.pyplot as plt
 from sklearn.utils import shuffle
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score
 from sklearn.feature_extraction import DictVectorizer
-from sklearn import model_selection
-from sklearn.metrics import confusion_matrix
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.naive_bayes import GaussianNB
 
 
 #Read the file
@@ -60,6 +47,7 @@ featuresets = []
 #Deal with sarcastic comments
 index = 0
 for com in sarcComments:
+    com=com.text
     featuresets.append((feature_extract.getallfeatureset(com, topic_mod), cls_set[1]))
     index += 1
 
@@ -133,6 +121,6 @@ fileObject.close()
 print ('Validating')
 
 output = classifier.predict(testvec)
-clfreport = classification_report(test_targets, output, targets_names=cls_set)
+clfreport = classification_report(test_targets, output, target_names=cls_set)
 print (clfreport)
 print(accuracy_score(test_targets, output)*100)

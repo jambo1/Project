@@ -5,8 +5,7 @@ from nltk.tokenize import RegexpTokenizer
 import nltk
 import ProjectV2.preprocess as prep
 import string
-from ProjectV2.comment import Comment
-#import ProjectV2.comment as Comment
+
 
 wordnet_lemmatizer = WordNetLemmatizer()
 tokenizer = RegexpTokenizer(r'\w+')
@@ -182,16 +181,17 @@ def getLOLs(features, tokens):
     features['lols']=count
 
 #Return all the above
-def getallfeatureset(com: Comment, topic_modeler):
+def getallfeatureset(sentence, topic_modeler):
     features = {}
-    getCapitalFeats(features, com.text)
-    getPunctuationCnt(features, com.text)
-    countEmotion(features, com.text)
-    getBigramFeats(features, com.words)
-    getHalfSentimentFeats(features, com.words)
-    getThirdSentimentFeats(features, com.words)
-    getPOSfeats(features, com.words)
-    getTopicFeats(features, com.text, topic_modeler)
-    #getLOLs(features, com.words)
+    blob = TextBlob(sentence)
+    getCapitalFeats(features, sentence)
+    getPunctuationCnt(features, sentence)
+    countEmotion(features, sentence)
+    getBigramFeats(features, blob.words)
+    getHalfSentimentFeats(features, blob.words)
+    getThirdSentimentFeats(features, blob.words)
+    getPOSfeats(features, blob.words)
+    getTopicFeats(features, sentence, topic_modeler)
+    #getLOLs(features, blob.words)
     return features
 

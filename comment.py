@@ -1,6 +1,6 @@
 from textblob import TextBlob
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from ProjectV2.feature_extract import getallfeatureset
+
 
 # Comment object to store required information from the file
 class Comment:
@@ -38,5 +38,3 @@ class Comment:
     def getInfo(self):
         print("Label: ", self.label, " Text: ", self.text)
 
- #   def getFeatures(self):
- #       return self.features
