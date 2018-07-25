@@ -181,17 +181,19 @@ def getLOLs(features, tokens):
     features['lols']=count
 
 #Return all the above
-def getallfeatureset(sentence, topic_modeler):
+def getallfeatureset(com, topic_modeler):
     features = {}
-    blob = TextBlob(sentence)
-    getCapitalFeats(features, sentence)
-    getPunctuationCnt(features, sentence)
-    countEmotion(features, sentence)
-    getBigramFeats(features, blob.words)
-    getHalfSentimentFeats(features, blob.words)
-    getThirdSentimentFeats(features, blob.words)
-    getPOSfeats(features, blob.words)
-    getTopicFeats(features, sentence, topic_modeler)
-    #getLOLs(features, blob.words)
+    #blob = TextBlob(com)
+    getCapitalFeats(features, com.text)
+    getPunctuationCnt(features, com.text)
+    getBigramFeats(features, com.words)
+    getHalfSentimentFeats(features, com.words)
+    getThirdSentimentFeats(features, com.words)
+    getPOSfeats(features, com.words)
+    getTopicFeats(features, com.text, topic_modeler)
+    #LOLs appear in less than 1% of sarcastic and not at all in negative comments, are these good to use?
+    getLOLs(features, com.words)
+    #The reddit dataset appears cleaned of emoticons
+    countEmotion(features, com.text)
     return features
 

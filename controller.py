@@ -5,10 +5,18 @@ from sklearn.svm import SVC
 from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score
 from sklearn.feature_extraction import DictVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import MultinomialNB
+from sklearn import model_selection
 import pickle
 import ProjectV2.feature_extract as feature_extract
 import ProjectV2.get_texts as GetTexts
 import ProjectV2.topic_build as Topical
+import ProjectV2.comment as comment
 
 
 #These are the smaller files
@@ -26,10 +34,10 @@ cls_set = ['Non-Sarcastic', 'Sarcastic']
 featuresets = []
 
 for com in sarcComments:
-    featuresets.append((feature_extract.getallfeatureset(com.text, topic_mod), cls_set[1]))
+    featuresets.append((feature_extract.getallfeatureset(com, topic_mod), cls_set[1]))
 
 for com in negComments:
-    featuresets.append((feature_extract.getallfeatureset(com.text, topic_mod), cls_set[0]))
+    featuresets.append((feature_extract.getallfeatureset(com, topic_mod), cls_set[0]))
 
 featuresets = np.array(featuresets)
 targets = (featuresets[0::, 1] == 'Sarcastic').astype(int)
@@ -70,20 +78,58 @@ for j in range(int(ratio - 1.0)):
 labels = np.unique(new_train_targets)
 print(labels)
 
-classifier = SVC(C=0.1, kernel='linear')
-classifier.fit(new_trainvec, new_train_targets)
+# #To update cannot use for SVM
+# file1 = open('classif_all.p','rb')
+# classifier= pickle.load(file1)
+# file1.close()
+# classifier.update(new_trainvec, new_train_targets)
 
-# Saving the classifier
-file_Name = "classif_all.p"
-fileObject = open(file_Name, 'wb')
-pickle.dump(classifier, fileObject)
-fileObject.close()
+#To implement classifier first time
+#classifier = SVC(C=0.1,kernel='linear')
+# classifier.fit(new_trainvec, new_train_targets)
 
-print('Validating')
+results =[]
+names =[]
+model = GaussianNB()
+kfold = model_selection.KFold(n_splits=10, random_state=7)
+cv_results = model_selection.cross_val_score(model, trainvec.todense(), new_train_targets, cv=kfold, scoring='accuracy')
+results.append(cv_results)
+print(cv_results)
+msg = "%s: %f (%f)" %("NB", cv_results.mean(), cv_results.std())
+print(msg)
 
-output = classifier.predict(testvec)
-clfreport = classification_report(test_targets, output, target_names=cls_set)
-print (clfreport)
-print(accuracy_score(test_targets, output) * 100)
 
 
+# #Saving the classifier
+# file_Name = "classif_all.p"
+# fileObject = open(file_Name, 'wb', )
+# pickle.dump(classifier, fileObject)
+# fileObject.close()
+#
+# print('Validating SVM')
+#
+# output = classifier.predict(testvec)
+# clfreport = classification_report(test_targets, output, target_names=cls_set)
+# print (clfreport)
+# print(accuracy_score(test_targets, output) * 100)
+
+#
+# models = []
+# models.append(('LR', LogisticRegression()))
+# models.append(('LDA', LinearDiscriminantAnalysis()))
+# models.append(('KNN', KNeighborsClassifier()))
+# models.append(('CART', DecisionTreeClassifier()))
+# models.append(('NB', GaussianNB()))
+# models.append(('SVM', SVC()))
+#
+# results = []
+# names = []
+# seed=7
+# scoring='accuracy'
+# for name,model in models:
+#     kfold = model_selection.KFold(n_splits=10, random_state=seed)
+#     cv_results = model_selection.cross_val_score(model, trainvec.todense(), new_train_targets, cv=kfold, scoring=scoring)
+#     results.append(cv_results)
+#     names.append(name)
+#     msg = "%s: %f (%f)" %(name, cv_results.mean(), cv_results.std())
+#     print(msg)

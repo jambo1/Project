@@ -47,14 +47,14 @@ featuresets = []
 #Deal with sarcastic comments
 index = 0
 for com in sarcComments:
-    com=com.text
+    # com = com.text
     featuresets.append((feature_extract.getallfeatureset(com, topic_mod), cls_set[1]))
     index += 1
 
 #Deal with non sarcastic comments
 index = 0
 for com in negComments:
-    com = com.text
+    #com = com.text
     featuresets.append((feature_extract.getallfeatureset(com, topic_mod), cls_set[0]))
     index += 1
 
