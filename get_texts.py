@@ -17,9 +17,9 @@ def read_dirty_file(filename):
                 sentence = replace_emo(sentence)
                 sentence = replace_reg(sentence)
                 if(row['label']=='1'):
-                    sarc_comments.append(Comment(row['label'],sentence))
+                    sarc_comments.append(Comment(sentence))
                 elif(row['label']=='0'):
-                    neg_comments.append(Comment(row['label'],sentence))
+                    neg_comments.append(Comment(sentence))
 
     #Put both into np arrays so they can be easier accessed for future uses
     sarc_coms = np.array(sarc_comments)
@@ -41,7 +41,7 @@ def read_sarc_file(filename):
                 sentence = replace_emo(sentence)
                 sentence = replace_reg(sentence)
                 if(row['label']=='1'):
-                    sarc_comments.append(Comment(row['label'],sentence))
+                    sarc_comments.append(Comment(sentence))
 
     #Put both into np arrays so they can be easier accessed for future uses
     sarc_coms = np.array(sarc_comments)
@@ -61,7 +61,7 @@ def read_neg_file(filename):
                 sentence = replace_emo(sentence)
                 sentence = replace_reg(sentence)
                 if(row['label']=='0'):
-                    neg_comments.append(Comment(row['label'],sentence))
+                    neg_comments.append(Comment(sentence))
 
     #Put both into np arrays so they can be easier accessed for future uses
     neg_coms = np.array(neg_comments)

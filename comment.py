@@ -4,8 +4,9 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 # Comment object to store required information from the file
 class Comment:
-    def __init__(self, label, text):
-        self.label = label
+    def __init__(self, text):
+        # Isn't necessary to save the label
+        # self.label = label
         self.text = text
         self.split_text = text.split()
         self.blob = TextBlob(self.text)

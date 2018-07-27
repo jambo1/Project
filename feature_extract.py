@@ -193,7 +193,6 @@ def getallfeatureset(com, topic_modeler):
     getTopicFeats(features, com.text, topic_modeler)
     #LOLs appear in less than 1% of sarcastic and not at all in negative comments, are these good to use?
     getLOLs(features, com.words)
-    #The reddit dataset appears cleaned of emoticons
     countEmotion(features, com.text)
     return features
 
