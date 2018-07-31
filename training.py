@@ -4,7 +4,7 @@ import ProjectV2.topic_build as Topical
 import numpy as np
 import ProjectV2.feature_extract as feature_extract
 import scipy as sp
-import pickle
+from sklearn.externals import joblib
 from sklearn.utils import shuffle
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report
@@ -15,17 +15,17 @@ from sklearn.feature_extraction import DictVectorizer
 #Read the file
 print("Reading file")
 
-#Uncomment for the bigger files
-sarcComments = GetTexts.read_sarc_file('BigSarc.csv')
-negComments = GetTexts.read_neg_file('BigNeg.csv')
+# #Uncomment for the bigger files
+# sarcComments = GetTexts.read_sarc_file('BigSarc.csv')
+# negComments = GetTexts.read_neg_file('BigNeg.csv')
 
-# #These are the smaller files
-# sarcComments = GetTexts.read_sarc_file("Sarc Set.csv")
-# negComments = GetTexts.read_neg_file("Non Sarc Set.csv")
+#These are the smaller files
+sarcComments = GetTexts.read_sarc_file("Sarc Set.csv")
+negComments = GetTexts.read_neg_file("Non Sarc Set.csv")
 
-##Uncomment the following when the desired data is already in the system
-#sarcComments = np.load("sarccoms.npy")
-#negComments = np.load("negcoms.npy")
+# #Uncomment the following when the desired data is already in the system
+# sarcComments = np.load("SarcFiles/50kFiles/sarccoms.npy")
+# negComments = np.load("SarcFiles/50kFiles/negcoms.npy")
 
 print("Done reading file")
 
@@ -77,23 +77,21 @@ vec = DictVectorizer()
 featurevec = vec.fit_transform(featuresets[0::,0])
 print("Saving vect dict")
 file_Name = "vectordict.p"
-fileObject = open(file_Name, 'wb')
-pickle.dump(vec, fileObject)
-fileObject.close()
+joblib.dump(vec, file_Name)
 
 print("Splitting the featuresets into training and testing")
 order=shuffle(range(len(featuresets)))
 labels=labels[order]
 featurevec=featurevec[order,0::]
 
-#Spliting
-size = int(len(featuresets) * .3) # 30% is used for the test set
+# #Spliting
+# size = int(len(featuresets) * .3) # 30% is used for the test set
 
 print("Setting training and test targets and vectors")
-trainvec = featurevec[size:,0::]
-train_targets = labels[size:]
-testvec = featurevec[:size,0::]
-test_targets = labels[:size]
+trainvec = featurevec[:,0::]
+train_targets = labels[:]
+# testvec = featurevec[:size,0::]
+# test_targets = labels[:size]
 
 #The following works with above 60% accuracy
 print("Set the training data")
@@ -114,13 +112,11 @@ classifier.fit(new_trainvec,new_train_targets)
 print("Saving the classifier")
 #Saving the classifier
 file_Name = "classif_all.p"
-fileObject = open(file_Name,'wb')
-pickle.dump(classifier, fileObject)
-fileObject.close()
+joblib.dump(classifier, file_Name)
 
-print ('Validating')
-
-output = classifier.predict(testvec)
-clfreport = classification_report(test_targets, output, target_names=cls_set)
-print (clfreport)
-print(accuracy_score(test_targets, output)*100)
+# print ('Validating')
+#
+# output = classifier.predict(testvec)
+# clfreport = classification_report(test_targets, output, target_names=cls_set)
+# print (clfreport)
+# print(accuracy_score(test_targets, output)*100)

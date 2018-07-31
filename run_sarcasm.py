@@ -3,28 +3,27 @@ import numpy as np
 import scipy as sp
 from sklearn.svm import SVC
 import pickle
+from sklearn.externals import joblib
 import ProjectV2.feature_extract as feature_extract
 from ProjectV2.comment import Comment
 import ProjectV2.topic_build as topic
+from time import time
 
 
-
+t1=time()
 #Read in the saved sarcastic and negative comments numpy arrays
-sarcComments = np.load("sarccoms.npy")
-negComments = np.load("negcoms.npy")
+sarcComments = np.load("SarcFiles/50kFiles/sarccoms.npy")
+negComments = np.load("SarcFiles/50kFiles/negcoms.npy")
 
 #Load the DictVectorizer and classifier
-file1 = "vectordict.p"
-file2 = "classif_all.p"
-vecObject = open(file1, 'rb')
-classifObject = open(file2, 'rb')
-vec = pickle.load(vecObject)
-classifier = pickle.load(classifObject)
-vecObject.close()
-classifObject.close()
+file1 = "SarcFiles/50kFiles/vectordict.p"
+file2 = "SarcFiles/50kFiles/classif_all.p"
 
-topic_mod = topic.topic(model=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'topics.tp'),\
-                        dicttp=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'topics_dict.tp'))
+vec = joblib.load(file1)
+classifier = joblib.load(file2)
+
+topic_mod = topic.topic(model=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'SarcFiles/50kFiles/topics.tp'),\
+                        dicttp=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'SarcFiles/50kFiles/topics_dict.tp'))
 
 def getSarcasmScore(sentence):
     sentence = Comment(sentence)
@@ -43,3 +42,7 @@ print(getSarcasmScore(sentence1),"% sarcastic")
 print(getSarcasmScore(sentence2),"% sarcastic")
 print(getSarcasmScore(sentence3))
 print(getSarcasmScore(sentence4))
+
+print("Time taken =", time()-t1)
+
+#def getStats():

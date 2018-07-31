@@ -17,7 +17,7 @@ import ProjectV2.feature_extract as feature_extract
 import ProjectV2.get_texts as GetTexts
 import ProjectV2.topic_build as Topical
 import ProjectV2.comment as comment
-
+from sklearn.externals import joblib
 
 #These are the smaller files
 sarcComments = GetTexts.read_sarc_file("Sarc Set.csv")
@@ -46,10 +46,10 @@ vec = DictVectorizer()
 featurevec = vec.fit_transform(featuresets[0::, 0])
 
 # Saving the dictionnary vectorizer
-file_Name = "vecdict_all.p"
-fileObject = open(file_Name, 'wb')
-pickle.dump(vec, fileObject)
-fileObject.close()
+file_Name = "vectordict.p"
+#fileObject = open(file_Name, 'wb')
+joblib.dump(vec, file_Name)
+#fileObject.close()
 
 print('Feature splitting')
 # Shuffling
@@ -85,8 +85,8 @@ print(labels)
 # classifier.update(new_trainvec, new_train_targets)
 
 #To implement classifier first time
-#classifier = SVC(C=0.1,kernel='linear')
-# classifier.fit(new_trainvec, new_train_targets)
+classifier = SVC(C=0.1,kernel='linear')
+classifier.fit(new_trainvec, new_train_targets)
 
 # results =[]
 # names =[]
@@ -101,17 +101,19 @@ print(labels)
 
 
 # #Saving the classifier
-# file_Name = "classif_all.p"
+file_Name = "classif_all.p"
 # fileObject = open(file_Name, 'wb', )
 # pickle.dump(classifier, fileObject)
 # fileObject.close()
-#
-# print('Validating SVM')
-#
-# output = classifier.predict(testvec)
-# clfreport = classification_report(test_targets, output, target_names=cls_set)
-# print (clfreport)
-# print(accuracy_score(test_targets, output) * 100)
+joblib.dump(classifier, file_Name)
+
+
+print('Validating SVM')
+
+output = classifier.predict(testvec)
+clfreport = classification_report(test_targets, output, target_names=cls_set)
+print (clfreport)
+print(accuracy_score(test_targets, output) * 100)
 
 #
 # models = []

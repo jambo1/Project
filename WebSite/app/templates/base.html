@@ -1,15 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Base</title>
+{% extends 'bootstrap/base.html' %}
 
-</head>
-<body>
-    <h1>School of sarcastic computer learning</h1>
-    <div>School of Sarcasm: <a href="/index">Home</a></div>
-    <div>School of Sarcasm: <a href="/sarcasm">Sarcasm Score Generator</a></div>
-    <hr>
-    {% block content %}{% endblock %}
-</body>
-</html>
+{% block title %}
+    School of sarcastic computer learning
+{% endblock %}
+
+{% block navbar %}
+     <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('index') }}">School of Sarcasm, yay</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                <a href="{{ url_for('index')}}">Home</a>
+                <a href="{{ url_for('about')}}">About</a>
+                <a href="{{ url_for('detect_sarcasm')}}">Sarcasm Score Generator</a>
+                </ul>
+             </div>
+        </div>
+     </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {# application content needs to be provided in the app_content block #}
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}
