@@ -88,15 +88,15 @@ print(labels)
 #classifier = SVC(C=0.1,kernel='linear')
 # classifier.fit(new_trainvec, new_train_targets)
 
-results =[]
-names =[]
-model = GaussianNB()
-kfold = model_selection.KFold(n_splits=10, random_state=7)
-cv_results = model_selection.cross_val_score(model, trainvec.todense(), new_train_targets, cv=kfold, scoring='accuracy')
-results.append(cv_results)
-print(cv_results)
-msg = "%s: %f (%f)" %("NB", cv_results.mean(), cv_results.std())
-print(msg)
+# results =[]
+# names =[]
+# model = GaussianNB()
+# kfold = model_selection.KFold(n_splits=10, random_state=7)
+# cv_results = model_selection.cross_val_score(model, trainvec.todense(), new_train_targets, cv=kfold, scoring='accuracy')
+# results.append(cv_results)
+# print(cv_results)
+# msg = "%s: %f (%f)" %("NB", cv_results.mean(), cv_results.std())
+# print(msg)
 
 
 

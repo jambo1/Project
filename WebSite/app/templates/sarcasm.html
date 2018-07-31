@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+ <h2>Enter a sentence to determine it's sarcasm level</h2>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.user_input.label }}<br>
+            {{ form.user_input(size=32) }}
+        </p>
+        <p>{{ form.more_details() }} {{ form.more_details.label }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

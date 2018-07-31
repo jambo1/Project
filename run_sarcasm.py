@@ -35,11 +35,11 @@ def getSarcasmScore(sentence):
 
     return percentage
 
-sentence1 = "Oh no what happened"
-sentence2 = "Well done aren;t you so smart, idiot"
-sentence3 = "Thanks very much for all the lovely messages"
-sentence4 = "More rain, lucky us"
-print(getSarcasmScore(sentence1))
-print(getSarcasmScore(sentence2))
+sentence1 = "oh i didn't know that"
+sentence2 = "the world is going to end tomorrow"
+sentence3 = "AMAZING work trump!!!!!! stealing people's kids, how smart"
+sentence4 = "You're a genius, how has no one ever thought of this before I wonder"
+print(getSarcasmScore(sentence1),"% sarcastic")
+print(getSarcasmScore(sentence2),"% sarcastic")
 print(getSarcasmScore(sentence3))
 print(getSarcasmScore(sentence4))
