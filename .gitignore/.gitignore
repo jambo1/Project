@@ -103,12 +103,7 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-#Numpy
-.npy
 
-#CSV
-.csv
 
-.tp
-.tp.*
+
 .pyc
