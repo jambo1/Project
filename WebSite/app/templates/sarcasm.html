@@ -8,5 +8,33 @@
         <div class="col-md-4">
             {{ wtf.quick_form(form) }}
         </div>
+        <div id="gauge"></div>
     </div>
+
+    <script src="app/static/js/jquery-1.4.min.js"></script>
+    <script src = "app/static/js/jquery.jqcanvas-modified.js"></script >
+    <script src = "app/static/js/jquery.speedometer.js" > </script >
+    <script src = "app/static/js/excanvas-modified.js" ></script >
+
+    <script type=text/javascript>
+        $(document).ready(function() {
+            $('#gauge').speedoMeter({
+                id: "gauge",
+                percentage: 1,
+                minimum: -100,
+                maximum: 100
+            })
+        })
+
+
+        //
+        // var g;
+        //     var g = new speedometer({
+        //         id: "gauge",
+        //         percentage: 1,
+        //         minimum: -100,
+        //         maximum: 100
+        // });
+    </script>
+
 {% endblock %}
