@@ -19,6 +19,8 @@ emo_repl = {
     ";)": " good ",
     "(-:": " good ",
     "(:": " good ",
+    ":D": " good ",
+    ":P": " good ",
 
     "yay!": " good ",
     "yay": " good ",
