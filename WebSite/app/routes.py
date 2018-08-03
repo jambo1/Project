@@ -17,20 +17,27 @@ def index():
 def about():
     return render_template('about.html')
 
+@application.route('/portfolio')
+def portfolio():
+    return render_template('portfolio.html')
+
 @application.route('/sarcasm', methods=['GET', 'POST'])
 def detect_sarcasm():
     form = SarcasmForm()
     if form.validate_on_submit():
-        # Load the DictVectorizer and classifier
-        file1 = "app/SarcFiles/25kFiles/vectordict.p"
-        file2 = "app/SarcFiles/25kFiles/classif_all.p"
+        #Save the sample size chosen
+        chosenFile = form.sample_size.data
 
+        # Load the relevant DictVectorizer and classifier
+        file1 = "app/SarcFiles/"+chosenFile+"/vectordict.p"
+        file2 = "app/SarcFiles/"+chosenFile+"/classif_all.p"
         vec = joblib.load(file1)
         classifier = joblib.load(file2)
 
+        #Load the relevant topic modeller
         topic_mod = topic.topic(
-            model=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'SarcFiles/25kFiles/topics.tp'), \
-            dicttp=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'SarcFiles/25kFiles/topics_dict.tp'))
+            model=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'SarcFiles/'+chosenFile+'/topics.tp'), \
+            dicttp=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'SarcFiles/'+chosenFile+'/topics_dict.tp'))
 
         #sentence = form.user_input.data
         sentence = Comment(form.user_input.data)
@@ -40,8 +47,8 @@ def detect_sarcasm():
         result = int(round(2.0 * (1.0 / (1.0 + np.exp(-score)) - 0.5) * 100.0))
 
         # flash("The percentage of sarcasm for '"+ form.user_input.data+ "' was "+str(result))
-        if form.more_details:
+        if form.more_details.data:
             return render_template('sarcasm.html', form=form, result=result, feature=feature)
         else:
-            return render_template('sarcasm.html', form=form, result=result, feature=None)
+            return render_template('sarcasm.html', form=form, result=result)
     return render_template('sarcasm.html', form=form)

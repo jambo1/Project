@@ -1,12 +1,15 @@
 {% extends 'bootstrap/base.html' %}
 {% block styles %}
 {{super()}}
+<!--CSS-->
 <link rel="stylesheet" href="../static/css/bootstrap.css">
 <link rel="stylesheet" href="../static/css/style.css">
 <link rel="stylesheet" href="../static/css/animate.css">
 <link rel="stylesheet" href="../static/css/flexslider.css">
 <link rel="stylesheet" href="../static/css/icomoon.css">
 
+<!--Font-->
+<link type="text/css" href="../static/fonts/icomoon/icomoon.woff">
 {% endblock %}
 
 {% block title %}
@@ -14,7 +17,7 @@
 {% endblock %}
 
 {% block navbar %}
-     <nav class="navbar navbar-default">
+     <nav class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -30,6 +33,8 @@
                 <a href="{{ url_for('index')}}">Home</a>
                 <a href="{{ url_for('about')}}">About</a>
                 <a href="{{ url_for('detect_sarcasm')}}">Sarcasm Score Generator</a>
+                    <a href="https://github.com/jambo1/Project"><img src="../static/images/GithubLogo.png" alt="Github" width="35"
+                    height="35"></a>
                 </ul>
              </div>
         </div>
