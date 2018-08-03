@@ -3,6 +3,7 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
+<section id="box">
 <div class="page-header">
   <h1>Enter a sentence to determine it's sarcasm level</h1>
 </div>
@@ -40,15 +41,17 @@
                     For more information about how these are used to predict sarcasm please see the about page
                 </p>
             {% endif %}
+
             </div>
 
 
             <div class="col-md-offset-7">
                 <div id="chart_div" style="width: 400px; height: 120px;"></div>
             </div>
+
         </div>
     </div>
-
+ </section>
 
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

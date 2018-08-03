@@ -284,6 +284,7 @@ th {
 
   .navbar {
     display: none;
+    color: palegreen;
   }
 
   .btn > .caret,

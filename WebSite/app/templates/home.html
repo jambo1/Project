@@ -1,12 +1,29 @@
 {% extends "base.html" %}
+{% block styles %}
+{{super()}}
+<!--<link rel="stylesheet" href="../static/css/home.css">-->
+<!--<style>-->
+    <!--#box {-->
+        <!--background-image: linear-gradient(lightsteelblue, lightgrey);-->
+    <!--}-->
+<!--</style>-->
+{% endblock %}
+
+            background-image: linear-gradient(white, lightgrey)
 
 {% block content %}
 <div class="row">
     <div class="col-sm-1"></div>
 
     <div class="col-md-8">
+        <section id="box">
+        <style>
+            background-image: linear-gradient(white, lightgrey)
+        </style>
+
         <div class="page-header">
-            <h1>Welcome to the school of computer sarcasm!</h1>
+            <h1>
+                Welcome to the school of computer sarcasm!</h1>
         </div>
         <body>
             <p>
@@ -20,8 +37,8 @@
             <p>
                 I really hope you have a great day....hmm yea okay
             </p>
-
         </body>
+        </section>
     </div>
 </div>
 

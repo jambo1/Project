@@ -1,0 +1,21 @@
+.navbar-default {
+    background-image: linear-gradient(lightsteelblue, lightgrey);
+    border-color: silver;
+}
+/*body {*/
+    /*background-image: radial-gradient(circle, silver, white);*/
+/*}*/
+
+#box {
+    background-image: linear-gradient(lightsteelblue,lightgrey);
+    border-radius: 25px;
+    padding: 10px;
+    padding-top: 2px;
+}
+body{
+    background-image: url("../images/ai_world.jpg");
+    background-size: cover;
+    /*backface-visibility: visible;*/
+}
+
+
