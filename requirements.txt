@@ -1,4 +1,4 @@
-absl-py==0.2.2
+lsabsl-py==0.2.2
 astor==0.7.1
 boto==2.49.0
 boto3==1.7.58
