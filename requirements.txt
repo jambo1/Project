@@ -1,4 +1,4 @@
-lsabsl-py==0.2.2
+absl-py==0.2.2
 astor==0.7.1
 boto==2.49.0
 boto3==1.7.58
@@ -38,8 +38,6 @@ scipy==1.1.0
 six==1.11.0
 sklearn==0.0
 smart-open==1.6.0
-tensorboard==1.9.0
-tensorflow==1.9.0
 termcolor==1.1.0
 textblob==0.15.1
 urllib3==1.23
