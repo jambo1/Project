@@ -7,31 +7,31 @@ the features dictionnary.  """
 
 # dictionnary to sentiment analysis
 emo_repl = {
-    # good emotions
-    "&lt;3": " good ",
-    ":d": " good ",
-    ":dd": " good ",
-    ":p": " good ",
-    "8)": " good ",
-    ":-)": " good ",
-    ":')": " good ",
-    ":)": " good ",
-    ";)": " good ",
-    "(-:": " good ",
-    "(:": " good ",
-    ":D": " good ",
-    ":P": " good ",
+    #goodemotions
+    "&lt;3": "good",
+    ":d": "good",
+    ":dd": "good",
+    ":p": "good",
+    "8)": "good",
+    ":-)": "good",
+    ":')": "good",
+    ":)": "good",
+    ";)": "good",
+    "(-:": "good",
+    "(:": "good",
+    ":D": "good",
+    ":P": "good",
 
-    "yay!": " good ",
-    "yay": " good ",
-    "yaay": " good ",
-    "yaaay": " good ",
-    "yaaaay": " good ",
-    "yaaaaay": " good ",
-    # bad emotions
+    "yay!": "good",
+    "yay": "good",
+    "yaay": "good",
+    "yaaay": "good",
+    "yaaaay": "good",
+    "yaaaaay": "good",
+    #bademotions
     ":/": " bad ",
-    ":&gt;": " sad ",
-    ":'(": " sad ",
+    ":&gt;": "sad",
+    ":'(": "sad",
     ":-(": " bad ",
     ":(": " bad ",
     ":s": " bad ",
@@ -40,27 +40,27 @@ emo_repl = {
 
 # dictionnary for general (i.e. topic modeler)
 emo_repl2 = {
-    # good emotions
-    "&lt;3": " heart ",
-    ":d": " smile ",
-    ":p": " smile ",
-    ":dd": " smile ",
-    "8)": " smile ",
-    ":-)": " smile ",
-    ":')": " smile ",
-    ":)": " smile ",
-    ";)": " smile ",
-    "(-:": " smile ",
-    "(:": " smile ",
+    #goodemotions
+    "&lt;3": "heart",
+    ":d": "smile",
+    ":p": "smile",
+    ":dd": "smile",
+    "8)": "smile",
+    ":-)": "smile",
+    ":')": "smile",
+    ":)": "smile",
+    ";)": "smile",
+    "(-:": "smile",
+    "(:": "smile",
 
     # bad emotions
-    ":/": " worry ",
-    ":&gt;": " angry ",
-    ":'(": " sad ",
-    ":-(": " sad ",
-    ":(": " sad ",
-    ":s": " sad ",
-    ":-s": " sad "
+    ":/": "worry",
+    ":&gt;": "angry",
+    ":'(": "sad",
+    ":-(": "sad",
+    ":(": "sad",
+    ":s": "sad",
+    ":-s": "sad"
 }
 
 # general

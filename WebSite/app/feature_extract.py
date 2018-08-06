@@ -153,8 +153,9 @@ def countEmotion(features, sentence):
     returnsent = sentence
     happy = 0
     sad = 0
-    for i in prep.emo_repl:
-        if i == 'good':
+    emodic = prep.emo_repl
+    for i in emodic:
+        if emodic[i] == "good":
             happy += returnsent.count(i)
         else:
             sad += returnsent.count(i)
