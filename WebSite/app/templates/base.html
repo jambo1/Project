@@ -1,16 +1,7 @@
 {% extends 'bootstrap/base.html' %}
+
 {% block styles %}
 {{super()}}
-<!--CSS-->
-<!--<link rel="stylesheet" href="../static/css/bootstrap.css">-->
-<!--<link rel="stylesheet" href="../static/css/style.css">-->
-<!--<link rel="stylesheet" href="../static/css/animate.css">-->
-<!--<link rel="stylesheet" href="../static/css/flexslider.css">-->
-<!--<link rel="stylesheet" href="../static/css/icomoon.css">-->
-
-<!--&lt;!&ndash;Font&ndash;&gt;-->
-<!--<link type="text/css" href="../static/fonts/icomoon/icomoon.woff">-->
-
 <link rel="stylesheet" href="../static/css/mystyle.css">
 {% endblock %}
 
@@ -28,11 +19,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url_for('index') }}">School of Sarcasm, yay</a>
+                <a class="navbar-brand" href="{{ url_for('index') }}">
+                    <img style="max-height:65px; margin-top: -15px;" src="../static/images/SarcasmSchool.png" alt="School of Sarcasm, yay">
+                </a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('index')}}">Home</a></li>
                     <li><a href="{{ url_for('about')}}">About</a></li>
                     <li><a href="{{ url_for('detect_sarcasm')}}">Sarcasm Score Generator</a></li>
                 </ul>

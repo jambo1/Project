@@ -1,6 +1,18 @@
 .navbar-default {
     background-image: linear-gradient(lightsteelblue, lightgrey);
     border-color: silver;
+    font-size: x-large;
+}
+h1 {font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, Arial, Verdana, sans-serif }
+h4 {font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, Arial, Verdana, sans-serif }
+
+p {font-family: Verdana, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+font-weight: inherit;
+}
+
+.active {
+    background-color: #4CAF50;
+    color: white;
 }
 /*body {*/
     /*background-image: radial-gradient(circle, silver, white);*/
