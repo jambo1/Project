@@ -1,5 +1,4 @@
 from textblob import TextBlob
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 
 # Comment object to store required information from the file

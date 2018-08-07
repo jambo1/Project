@@ -13,118 +13,135 @@
 
         <p style="font-weight: bold;">
         This website has been made to show the capabilities of computer intelligence in sarcasm analysis.
-    </p>
+            </p>
 
-    <h4>What is sarcasm anyway?</h4>
+            <h4>What is sarcasm anyway?</h4>
 
-    <p>Sarcasm is defined in the Cambridge dictionary as "the use of remarks that clearly mean the opposite of what they say, made in order to hurt
-        someone's feelings or to criticize something in a humorous way"; or if you happen to be American,
-    "remarks that mean the opposite of what they say, made to criticize someone or something in a way that is amusing
-        to others but annoying to the person criticized".</p>
+            <p>Sarcasm is defined in the Cambridge dictionary as "the use of remarks that clearly mean the opposite of what they say, made in order to hurt
+                someone's feelings or to criticize something in a humorous way"; or if you happen to be American,
+            "remarks that mean the opposite of what they say, made to criticize someone or something in a way that is amusing
+                to others but annoying to the person criticized".</p>
 
-    <h4>So why is it hard to detect?</h4>
+            <h4>So why is it hard to detect?</h4>
 
-    <p>Sarcasm analysis is a complex task for humans. Often in conversation sarcasm is noticed through the use of intonation
-        or body language. In a written medium these cues are not available, and humans will often rely on contextual information.
-        If we read the following sentence "Yea, great!!!!!" do we know if it is sarcastic? It could mean that someone is extremely excited
-        about something, or it could mean that they are being very sarcastic. In isolation it is extremely hard to tell without some context on what it is referring to. <br>
-        In online communication the problem is compounded as people place short comments in isolation, such as below an article on
-        Facebook or below a YouTube video. Unless the person reading the comment also sees the article or video they may not be able to judge the sarcasm, and even if they do
-        it is not always clear due to people’s vastly differing opinions.
-    </p>
-    <h4>Okay... so how does a computer program begin to understand this</h4>
-    <p>
-        This is where the Machine Learning topic of Natural Language Processing comes in!
-    </p>
-    <h4>Yes.... Natural Language Processing....I know exactly what you are talking about</h4>
-    <p>
-        Natural Language Processing is an area of computer science whereby computers are programmed to process and analyse large amounts of natural
-        language data. A natural language is a language which has formed organically, as opposed to a computer coding language or an artificial language. This information is then used by the computer to perform a desired function. <br>
-        In slightly simpler terms this means that we take a computer program and show it a lot of text with some additional
-         information, such as a label, e.g. whether or not it is sarcastic, and then apply this to a desired use on something it has never seen before, in this case to tell us if
-        a new sentence is sarcastic or not.
-    </p>
-    <h4>This sounds quite simple, why is everyone not doing it?</h4>
-    <p>
-    Well in fact lots of applications do use it! Google translate is entirely based on this. When you use a chatbot
-        on Facebook to find out information from a company or use any sort of speech to text (e.g. Siri) to help you perform a task, these are all utilising Natural Language Processing (NLP).
-        <br> But, it isn't as simple as it sounds…
-    </p>
-    <h4>So you have to do more than simply show a program a lot of text?</h4>
-    <p>
-        If you want it to work well yes! The raw data you show the program has to go through several processes, the first of which is called
-        "pre-processing". This involves taking the raw textual input and removing parts which you do not think are useful as these may skew the results. <br>
-        In this application we remove what are called "stopwords". These are extremely common words which do not add much
-        analytical value to the sentence, such as "the" "that" or "a". We then remove all sentences which are less than 3
-        words long from the dataset as these also carry little analytical value.
-    </p>
-    <h4>And then it's ready to use?</h4>
-    <p>
-        Not yet! At this point the sentence has passed our criteria to be included in the dataset, but we now need to extract the useful
-        information from it. This information is called the "features".
-    </p>
-    <h4>Why do we need to take out more information?</h4>
-    <p>
-        Computers work best on numerical information. If we can assign a numerical value to information which is related to
-        what we are trying to find then we can teach the computer the patterns to look for so it can find it too!<br>
-        We therefore need to see patterns ourselves, separate them from the rest of the data and find a way to represent them for the computer.
-    </p>
-    <h4>This is sounding like a lot of work to be honest...</h4>
-    <p>
-        It may be, but the rewards are huge. If we can find meaningful patterns and extract and represent this information, then we can utilise a computer's
-        processing power to perform repetitive or complex computation tasks while freeing humans to perform tasks which require our unique skillsets. <br>
-        Take the example of Google Translate. By teaching this program how to translate from one language to another instantaneously we have been
-        able to go all across the world and communicate with others without the need to learn the language ourselves. Training
-        that application has then aided millions of people going about their lives and saved them much time. <br>
-        Another very common application is the Spam filter on your email. An email provider creates an algorithm to
-        recognise emails which you mark as spam, or which others frequently mark as spam and which you delete or do not
-        read and sends these to your spam folder. This then ensures that you won’t miss an important email! <br>
-        Another use, which you may not interact with every day but will affect you, is in financial markets. News articles
-        referring to companies or countries can indicate bad or good news which may send stock prices up or down.
-        Financial institutions incorporate algorithms which trawl recent news and social media posts about companies and
-        countries to their trading algorithms. These algorithms can detect the sentiment in the articles, or posts, and
-        look for certain topics indicative of a likely change in price. The algorithm can then buy or sell financial
-        instruments quicker than a human could have read the article and will hope to have an edge over competitors.
-        How does this apply to you? It means that your pension grows quicker and that your insurance stays cheaper!
-    </p>
-    <h4>Okay, so it is very useful! But what features indicate sarcasm?</h4>
-    <p>
-        As this application seeks to look at a sentence in isolation it has no context to learn from. It therefore needs to
-        be given clues from the sentence alone. A study by Riloff et al. (2014) suggested a model where the sentiment of a sentence
-        (the positivity or negativity it contains) would be opposite in different parts of the sentence. For example, consider the following
-        "I love it when my car breaks down and I am late". "I love it" is positive, but "my car breaks down and I am late" is negative.
-        <br>To find these subtleties we can use sentiment analysis tools to find the sentiment score for different parts of
-        a sentence (each third and both halves) and then look for contrast between these scores. This contrast gives us a
-        numerical value to pass to our training model.
-        <br>We also program the computer to count if there are more than 4 capital letters, how many exclamation and sentence marks
-        are present and the number of happy and sad emoticons used. The number of nouns, verbs, adverbs and adjectives are counted
-        and all sequences of two words, known as bigrams, are saved.<br>
-        Finally topics, words which are used together in sentences, are stored. If these sequences are found to frequently
-        occur in either sarcastic or non-sarcastic texts then it aids the computer
-        in finding a pattern to recognise this.
-    </p>
-    <h4>And what text is actually used for this?</h4>
-    <p>
-        Due to the time consuming nature of reading and annotating thousands of text files a set of 1.5 million reddit comments,
-        pre annotated as sarcastic or not, was sourced. The sarcastic comments were labelled as such due to their including
-        the tag "sarcasm" on reddit. Although this is a body of texts from a specific social media medium it's applicability should
-        extend beyond Reddit comments and apply to other short pieces of text.
-    </p>
-    <h4>So you pre-process, you extract features and then...?</h4>
-    <p>
-        You show the features to a model, which is a computer algorithm that can spot patterns in data and use it to make
-        predictions with a certain degree of accuracy. For this project a Support Vector Machine was chosen as it is commonly
-        used in NLP and performed well in the selection tests performed.
-    </p>
-    <h4>And then it's ready to use?</h4>
-    <p>
-        Yes! Then it is ready to use; however, the more data the model is shown the better it performs. In order to show this effect the option
-        to change the size of the sample dataset is given for the generator. You can use the same sentence on multiple
-        classifiers based on different sample sizes and see how this changes your result! <br>
-    </p>
-    <h4>Play around with the Sarcasm Score Generator, try lots of sentences and dataset sizes and see how it changes the results!<br>
-        Hopefully you now know a little bit more about the world of Machine Learning and Natural
-        Language processing and you enjoy learning with the Sarcasm School!</h4>
+            <p>Sarcasm analysis is a complex task for humans. Often in conversation sarcasm is noticed through the use of intonation
+                or body language. In a written medium these cues are not available, and humans will often rely on contextual information.
+                If we read the following sentence "Yea, great!!!!!" do we know if it is sarcastic? It could mean that someone is extremely excited
+                about something, or it could mean that they are being very sarcastic. In isolation it is extremely hard to tell without some context on what it is referring to. <br>
+                In online communication the problem is compounded as people place short comments in isolation, such as below an article on
+                Facebook or below a YouTube video. Unless the person reading the comment also sees the article or video they may not be able to judge the sarcasm, and even if they do
+                it is not always clear due to people’s vastly differing opinions.
+            </p>
+            <h4>Okay... so how does a computer program begin to understand this</h4>
+            <p>
+                This is where the Machine Learning topic of Natural Language Processing comes in!
+            </p>
+            <h4>Yes.... Natural Language Processing....I know exactly what you are talking about</h4>
+            <p>
+                Natural Language Processing is an area of computer science whereby computers are programmed to process and analyse large amounts of natural
+                language data. A natural language is a language which has formed organically, as opposed to a computer coding language or an artificial language. This information is then used by the computer to perform a desired function. <br>
+                In slightly simpler terms this means that we take a computer program and show it a lot of text with some additional
+                 information, such as a label, e.g. whether or not it is sarcastic, and then apply this to a desired use on something it has never seen before, in this case to tell us if
+                a new sentence is sarcastic or not.
+            </p>
+            <h4>This sounds quite simple, why is everyone not doing it?</h4>
+            <p>
+            Well in fact lots of applications do use it! Google translate is entirely based on this. When you use a chatbot
+                on Facebook to find out information from a company or use any sort of speech to text (e.g. Siri) to help you perform a task, these are all utilising Natural Language Processing (NLP).
+                <br> But, it isn't as simple as it sounds…
+            </p>
+            <h4>So you have to do more than simply show a program a lot of text?</h4>
+            <p>
+                If you want it to work well yes! The raw data you show the program has to go through several processes, the first of which is called
+                "pre-processing". This involves taking the raw textual input and removing parts which you do not think are useful as these may skew the results. <br>
+                In this application we remove what are called "stopwords". These are extremely common words which do not add much
+                analytical value to the sentence, such as "the" "that" or "a". We then remove all sentences which are less than 3
+                words long from the dataset as these also carry little analytical value.
+            </p>
+            <h4>And then it's ready to use?</h4>
+            <p>
+                Not yet! At this point the sentence has passed our criteria to be included in the dataset, but we now need to extract the useful
+                information from it. This information is called the "features".
+            </p>
+            <h4>Why do we need to take out more information?</h4>
+            <p>
+                Computers work best on numerical information. If we can assign a numerical value to information which is related to
+                what we are trying to find then we can teach the computer the patterns to look for so it can find it too!<br>
+                We therefore need to see patterns ourselves, separate them from the rest of the data and find a way to represent them for the computer.
+            </p>
+            <h4>This is sounding like a lot of work to be honest...</h4>
+            <p>
+                It may be, but the rewards are huge. If we can find meaningful patterns and extract and represent this information, then we can utilise a computer's
+                processing power to perform repetitive or complex computation tasks while freeing humans to perform tasks which require our unique skillsets. <br>
+                Take the example of Google Translate. By teaching this program how to translate from one language to another instantaneously we have been
+                able to go all across the world and communicate with others without the need to learn the language ourselves. Training
+                that application has then aided millions of people going about their lives and saved them much time. <br>
+                Another very common application is the Spam filter on your email. An email provider creates an algorithm to
+                recognise emails which you mark as spam, or which others frequently mark as spam and which you delete or do not
+                read and sends these to your spam folder. This then ensures that you won’t miss an important email! <br>
+                Another use, which you may not interact with every day, but which will affect you, is in financial markets. News articles
+                referring to companies or countries can indicate bad or good news which may send stock prices up or down.
+                Financial institutions incorporate algorithms which trawl recent news and social media posts about companies and
+                countries to their trading algorithms. These algorithms can detect the sentiment in the articles, or posts, and
+                look for certain topics indicative of a likely change in price. The algorithm can then buy or sell financial
+                instruments quicker than a human could have read the article and will hope to have an edge over competitors.
+                How does this apply to you? It means that your pension grows quicker and that your insurance stays cheaper!
+            </p>
+            <h4>Okay, so it is very useful! But what features indicate sarcasm?</h4>
+            <p>
+                As this application seeks to look at a sentence in isolation it has no context to learn from. It therefore needs to
+                be given clues from the sentence alone. A study by Riloff et al. (2014) suggested a model where the sentiment of a sentence
+                (the positivity or negativity it contains) would be opposite in different parts of the sentence. For example, consider the following
+                "I love it when my car breaks down and I am late". "I love it" is positive, but "my car breaks down and I am late" is negative.
+                <br>To find these subtleties we can use sentiment analysis tools to find the sentiment score for different parts of
+                a sentence (each third and both halves) and then look for contrast between these scores. This contrast gives us a
+                numerical value to pass to our training model.
+                <br>We also program the computer to count if there are more than 4 capital letters, how many exclamation and sentence marks
+                are present and the number of happy and sad emoticons used. The number of nouns, verbs, adverbs and adjectives are counted
+                and all sequences of two words, known as bigrams, are saved.<br>
+                Finally topics, words which are used together in sentences, are stored. If these sequences are found to frequently
+                occur in either sarcastic or non-sarcastic texts then it aids the computer
+                in finding a pattern to recognise this.
+            </p>
+            <h4>And what text is actually used for this?</h4>
+            <p>
+                Due to the time consuming nature of reading and annotating thousands of text files a set of 1.5 million reddit comments,
+                pre annotated as sarcastic or not, was sourced. The sarcastic comments were labelled as such due to their including
+                the tag "sarcasm" on reddit. Although this is a body of texts from a specific social media medium it's applicability should
+                extend beyond Reddit comments and apply to other short pieces of text.
+            </p>
+            <h4>So you pre-process, you extract features and then...?</h4>
+            <p>
+                You show the features to a model, which is a computer algorithm that can spot patterns in data and use it to make
+                predictions with a certain degree of accuracy. For this project a Support Vector Machine was chosen as it is commonly
+                used in NLP and performed well in the selection tests performed.
+            </p>
+            <h4>And then it's ready to use?</h4>
+            <p>
+                Yes! Then it is ready to use; however, the more data the model is shown the better it performs. In order to show this effect the option
+                to change the size of the sample dataset is given for the generator. You can use the same sentence on multiple
+                classifiers based on different sample sizes and see how this changes your result! <br>
+            </p>
+            <br>
+            <h4>Play around with the Sarcasm Score Generator, try lots of sentences and dataset sizes and see how it changes the results!<br>
+                <br>Hopefully you now know a little bit more about the world of Machine Learning and Natural
+                Language processing and you enjoy learning with the Sarcasm School!
+            </h4>
+            <br><br>
+            <h4>Tools and tech used</h4>
+            <p>
+                This application has been built with Python, which is the most commonly used machine learning programming language.<br>
+                For the front end the web application framework Flask was used along with CSS, HTML and JavaScript with it all
+                hosted on PythonAnywhere.<br>
+                For the back end TextBlob was utilised to tokenize sentences and to analyse their subjectivity and sentiment.<br>
+                NLTK was used to stem and lemmatize sentences, to remove stopwords and to extract bigrams.<br>
+                Numpy was used to build and structure the vectors and to store the processed comment files.<br>
+                SciPy was used for forming the feature vectors.<br>
+                Gensim was used for generating the topics.<br>
+                Sklearn was used for saving and loading the topics, the DictVectorizer was used to convert the features to
+                a vector dictionary and its SVC classifier was used as the model.<br>
+            </p>
+            <h4>All of the source code can be found through the Github link in the navbar</h4>
 </section>
 
 

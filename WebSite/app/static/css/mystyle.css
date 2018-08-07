@@ -14,9 +14,6 @@ font-weight: inherit;
     background-color: #4CAF50;
     color: white;
 }
-/*body {*/
-    /*background-image: radial-gradient(circle, silver, white);*/
-/*}*/
 
 #box {
     background-image: linear-gradient(lightsteelblue,lightgrey);
@@ -27,7 +24,7 @@ font-weight: inherit;
 body{
     background-image: url("../images/ai_world.jpg");
     background-size: cover;
-    /*backface-visibility: visible;*/
+    background-attachment: fixed;
 }
 
 
