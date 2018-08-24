@@ -14,7 +14,7 @@ def read_dirty_file(filename):
         for row in reader:
             if len(row['comment'].split())>3:
                 sentence = row['comment']
-                sentence = replace_emo(sentence)
+                #sentence = replace_emo(sentence)
                 sentence = replace_reg(sentence)
                 if(row['label']=='1'):
                     sarc_comments.append(Comment(sentence))
@@ -38,7 +38,7 @@ def read_sarc_file(filename):
         for row in reader:
             if len(row['comment'].split())>3:
                 sentence = row['comment']
-                sentence = replace_emo(sentence)
+                #sentence = replace_emo(sentence)
                 sentence = replace_reg(sentence)
                 if(row['label']=='1'):
                     sarc_comments.append(Comment(sentence))
@@ -58,7 +58,7 @@ def read_neg_file(filename):
         for row in reader:
             if len(row['comment'].split())>3:
                 sentence = row['comment']
-                sentence = replace_emo(sentence)
+                #sentence = replace_emo(sentence)
                 sentence = replace_reg(sentence)
                 if(row['label']=='0'):
                     neg_comments.append(Comment(sentence))

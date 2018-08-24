@@ -7,8 +7,7 @@ import scipy as sp
 from sklearn.externals import joblib
 from sklearn.utils import shuffle
 from sklearn.svm import SVC
-from sklearn.metrics import classification_report
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report, accuracy_score, average_precision_score, f1_score, precision_score, recall_score, mean_squared_error, explained_variance_score
 from sklearn.feature_extraction import DictVectorizer
 
 
@@ -84,14 +83,14 @@ order=shuffle(range(len(featuresets)))
 labels=labels[order]
 featurevec=featurevec[order,0::]
 
-# #Spliting
-# size = int(len(featuresets) * .3) # 30% is used for the test set
+#Spliting
+size = int(len(featuresets) * .3) # 30% is used for the test set
 
 print("Setting training and test targets and vectors")
-trainvec = featurevec[:,0::]
-train_targets = labels[:]
-# testvec = featurevec[:size,0::]
-# test_targets = labels[:size]
+trainvec = featurevec[size:,0::]
+train_targets = labels[size:]
+testvec = featurevec[:size,0::]
+test_targets = labels[:size]
 
 #The following works with above 60% accuracy
 print("Set the training data")
@@ -114,9 +113,16 @@ print("Saving the classifier")
 file_Name = "classif_all.p"
 joblib.dump(classifier, file_Name)
 
-# print ('Validating')
-#
-# output = classifier.predict(testvec)
-# clfreport = classification_report(test_targets, output, target_names=cls_set)
-# print (clfreport)
-# print(accuracy_score(test_targets, output)*100)
+
+print ('Validating')
+
+output = classifier.predict(testvec)
+clfreport = classification_report(test_targets, output, target_names=cls_set)
+print (clfreport)
+print("Accuracy score", accuracy_score(test_targets, output)*100)
+print("MSE", mean_squared_error(test_targets, output))
+print("Explained variance", explained_variance_score(test_targets, output))
+print("Recall", recall_score(test_targets, output))
+print("Average precision", average_precision_score(test_targets, output))
+print("F1", f1_score(test_targets, output))
+print("Precision", precision_score(test_targets, output))

@@ -184,7 +184,6 @@ def getLOLs(features, tokens):
 #Return all the above
 def getallfeatureset(com, topic_modeler):
     features = {}
-    #blob = TextBlob(com)
     getCapitalFeats(features, com.text)
     getPunctuationCnt(features, com.text)
     getBigramFeats(features, com.words)
@@ -192,7 +191,6 @@ def getallfeatureset(com, topic_modeler):
     getThirdSentimentFeats(features, com.words)
     getPOSfeats(features, com.words)
     getTopicFeats(features, com.text, topic_modeler)
-    #LOLs appear in less than 1% of sarcastic and not at all in negative comments, are these good to use?
     getLOLs(features, com.words)
     countEmotion(features, com.text)
     return features
