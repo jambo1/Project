@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<section id="box">
+<div class="page-header">
+  <h1>Enter a sentence to determine it's sarcasm level</h1>
+</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {{ wtf.quick_form(form) }}
+
+            {% if feature !=null %}
+                <p>The following features were extracted from your sentence and gave it a score of {{result}}% sarcastic:</p>
+                <p>There were {{feature['lols']}} 'lol' type phrases<br>
+                There were {{feature['sademo']}} 'sad' emoticons and {{feature['happyemo']}} 'happy' emoticons<br>
+                There were {{feature['exclamation']}} exclamation and question marks</p>
+                <p>
+                    There were {{feature['POS1']}} nouns in your sentence<br>
+                    There were {{feature['POS2']}} adjectives in your sentence<br>
+                    There were {{feature['POS3']}} verbs in your sentence<br>
+                    There were {{feature['POS4']}} adverbs in your sentence
+                </p>
+                <p>The subjectivity score of a sentence is a measure of how objective or subjective it is. Subjectivity can be described as the
+                statement of opinions whereas objectivity would relate to a statement of facts. Within this application a subjectivity score of 0
+                    represents a very objective (fact based) sentence whereas a score of 1 represents a very subjective (opinion based) sentence.<br>
+                    In your sentence the subjectivity of the first half was {{feature['subjective fhalf']}} and the second half was {{feature['subjective shalf']}}
+                </p>
+                <p>The sentiment of the sentence is the negativity or positivity implied by it, i.e. "I hate you" is negative,
+                    whereas "I love you" would be positive. This is measured on a scale of -1 (for very negative) to 1 (for very positive)
+                    with 0 representing no significant sentiment in the sentence.<br>
+                    The contrast in sentiment between the:<br>
+                    1st ({{feature['sentiment fthird']}}) and 2nd ({{feature['sentiment sthird']}}) thirds of the sentence was {{feature['sentiment 1/2contrast']}}<br>
+                    2nd ({{feature['sentiment sthird']}}) and 3rd ({{feature['sentiment tthird']}}) thirds of the sentence was {{feature['sentiment 2/3contrast']}}<br>
+                    1st ({{feature['sentiment fthird']}}) and 3rd ({{feature['sentiment tthird']}}) thirds of the sentence was {{feature['sentiment 1/3contrast']}}<br>
+                    1st ({{feature['sentiment fhalf']}}) and 2nd ({{feature['sentiment shalf']}}) half of the sentence was {{feature['sentiment halfcontrast']}}<br>
+                </p>
+                <p>
+                    For more information about how these are used to predict sarcasm please see the about page
+                </p>
+            {% endif %}
+
+            </div>
+
+
+            <div class="col-md-offset-7">
+
+                <div id="chart_div" style="width: 400px; height: 120px;" alt="Error displaying gauge" title="Score of -100% is completely non-sarcastic
+score of 100% is completely sarcastic"></div>
+            </div>
+
+        </div>
+    </div>
+ </section>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Sarcasm', ({{result}})],
+        ]);
+
+        var options = {
+          width: 800, height: 400,
+          redFrom: -100, redTo: -50,
+          yellowFrom: -50, yellowTo: 50,
+            greenFrom: 50, greenTo: 100,
+          minorTicks: 5,
+            min: -100, max: 100
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+
+        setInterval(function() {
+          data.setValue(result);
+          chart.draw(data, options);
+        }, 13000);
+      }
+    </script>
+
+
+
+
+{% endblock %}

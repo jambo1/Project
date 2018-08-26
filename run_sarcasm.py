@@ -7,23 +7,24 @@ from sklearn.externals import joblib
 import ProjectV2.feature_extract as feature_extract
 from ProjectV2.comment import Comment
 import ProjectV2.topic_build as topic
-from time import time
 
 
-t1=time()
+
+
+
 #Read in the saved sarcastic and negative comments numpy arrays
-sarcComments = np.load("SarcFiles/25kFiles/sarccoms.npy")
-negComments = np.load("SarcFiles/25kFiles/negcoms.npy")
+sarcComments = np.load("WebSite/app/SarcFiles/25kFiles/sarccoms.npy")
+negComments = np.load("WebSite/app/SarcFiles/25kFiles/negcoms.npy")
 
 #Load the DictVectorizer and classifier
-file1 = "SarcFiles/25kFiles/vectordict.p"
-file2 = "SarcFiles/25kFiles/classif_all.p"
+file1 = "WebSite/app/SarcFiles/25kFiles/vectordict.p"
+file2 = "WebSite/app/SarcFiles/25kFiles/classif_all.p"
 
 vec = joblib.load(file1)
 classifier = joblib.load(file2)
 
-topic_mod = topic.topic(model=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'SarcFiles/25kFiles/topics.tp'),\
-                        dicttp=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'SarcFiles/25kFiles/topics_dict.tp'))
+topic_mod = topic.topic(model=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'WebSite/app/SarcFiles/25kFiles/topics.tp'),\
+                        dicttp=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'WebSite/app/SarcFiles/25kFiles/topics_dict.tp'))
 
 def getSarcasmScore(sentence):
     sentence = Comment(sentence)
@@ -34,15 +35,25 @@ def getSarcasmScore(sentence):
 
     return percentage
 
-sentence1 = "oh i didn't know that"
-sentence2 = "hello"
-sentence3 = "AMAZING work trump!!!!!! stealing people's kids, how smart"
-sentence4 = "You're a genius, how has no one ever thought of this before I wonder"
-print(getSarcasmScore(sentence1),"% sarcastic")
-print(getSarcasmScore(sentence2),"% sarcastic")
-print(getSarcasmScore(sentence3))
-print(getSarcasmScore(sentence4))
+#The commandline interface
+user_go = True
+while user_go==True:
+    user_input=input("Enter a sentence to determine its sarcasm score: ")
+    print("The percentage of sarcasm in the sentence was: ", getSarcasmScore(user_input))
 
-print("Time taken =", time()-t1)
+    #Ask user if they want to continue
+    while True:
+        carry_on = input("Continue? y/n: ").lower()
+        if carry_on=="y":
+            break
+        elif carry_on=="n":
+            user_go=False
+            print("Thank you and goodbye!")
+            break
+        else:
+            continue
 
-#def getStats():
+
+
+
+
