@@ -15,7 +15,7 @@ def read_dirty_file(filename):
             if len(row['comment'].split())>3:
                 count=0
                 for word in row['comment'].split():
-                    if bool(re.match('^[a-zA-Z0-9]+$', word)):
+                    if word.isalnum():
                         count += 1
                 if count > 2:
                     sentence = row['comment']
