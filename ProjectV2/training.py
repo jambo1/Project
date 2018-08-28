@@ -14,13 +14,10 @@ from sklearn.feature_extraction import DictVectorizer
 #Read the file
 print("Reading file")
 
-# #Uncomment for the bigger files
-# sarcComments = GetTexts.read_sarc_file('BigSarc.csv')
-# negComments = GetTexts.read_neg_file('BigNeg.csv')
 
-#These are the smaller files
-sarcComments = GetTexts.read_sarc_file("Sarc Set.csv")
-negComments = GetTexts.read_neg_file("Non Sarc Set.csv")
+#Read in the files
+sarcComments = GetTexts.read_file("Sarc Set.csv")
+negComments = GetTexts.read_file("Non Sarc Set.csv")
 
 # #Uncomment the following when the desired data is already in the system
 # sarcComments = np.load("SarcFiles/50kFiles/sarccoms.npy")

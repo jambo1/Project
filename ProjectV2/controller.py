@@ -20,8 +20,8 @@ import comment as comment
 from sklearn.externals import joblib
 
 #These are the smaller files
-sarcComments = GetTexts.read_sarc_file("Sarc Set.csv")
-negComments = GetTexts.read_neg_file("Non Sarc Set.csv")
+sarcComments = GetTexts.read_file("Sarc Set.csv")
+negComments = GetTexts.read_file("Non Sarc Set.csv")
 
 print('Number of  sarcastic coms :', len(sarcComments))
 print('Number of  non-sarcastic coms :', len(negComments))
