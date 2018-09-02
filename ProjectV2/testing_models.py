@@ -19,9 +19,13 @@ import topic_build as Topical
 import comment as comment
 from sklearn.externals import joblib
 
-#These are the smaller files
-sarcComments = GetTexts.read_file("Sarc Set.csv")
-negComments = GetTexts.read_file("Non Sarc Set.csv")
+# #These are the csv files
+# sarcComments = GetTexts.read_file("Sarc Set.csv")
+# negComments = GetTexts.read_file("Non Sarc Set.csv")
+
+#Uncomment the following when the desired data is already in the system
+sarcComments = np.load("WebSite/app/SarcFiles/1kFiles/sarccoms.npy")
+negComments = np.load("WebSite/app/SarcFiles/1kFiles/negcoms.npy")
 
 print('Number of  sarcastic coms :', len(sarcComments))
 print('Number of  non-sarcastic coms :', len(negComments))

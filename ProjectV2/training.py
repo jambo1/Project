@@ -14,14 +14,13 @@ from sklearn.feature_extraction import DictVectorizer
 #Read the file
 print("Reading file")
 
-
 #Read in the files
 sarcComments = GetTexts.read_file("Sarc Set.csv")
 negComments = GetTexts.read_file("Non Sarc Set.csv")
 
 # #Uncomment the following when the desired data is already in the system
-# sarcComments = np.load("SarcFiles/50kFiles/sarccoms.npy")
-# negComments = np.load("SarcFiles/50kFiles/negcoms.npy")
+# sarcComments = np.load("WebSite/app/SarcFiles/25kFiles/sarccoms.npy")
+# negComments = np.load("WebSite/app/SarcFiles/25kFiles/negcoms.npy")
 
 print("Done reading file")
 
@@ -36,7 +35,6 @@ for i in range (0,20):
     print(topic_mod.get_topic(i))
 
 print("The feature is beginning")
-
 cls_set = ['Non-Sarcastic', 'Sarcastic']
 featuresets = []
 

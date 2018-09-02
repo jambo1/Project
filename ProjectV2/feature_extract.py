@@ -141,7 +141,6 @@ def getCapitalFeats(features, sentence):
 #Exclamation mark counts
 def getPunctuationCnt(features, sentence):
     count = 0
-    punctuation = ['.', '?', '!', '*']
     for i in range(len(sentence)):
         count += int(sentence[i] == '!')
         count += int(sentence[i] == '?')
