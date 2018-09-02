@@ -3,7 +3,7 @@ import numpy as np
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import RegexpTokenizer
 import nltk
-import app.preprocess as prep
+import ProjectV2.preprocess as prep
 import string
 
 
@@ -141,7 +141,6 @@ def getCapitalFeats(features, sentence):
 #Exclamation mark counts
 def getPunctuationCnt(features, sentence):
     count = 0
-    punctuation = ['.', '?', '!', '*']
     for i in range(len(sentence)):
         count += int(sentence[i] == '!')
         count += int(sentence[i] == '?')

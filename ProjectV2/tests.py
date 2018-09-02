@@ -7,12 +7,14 @@ from ProjectV2.comment import Comment
 import ProjectV2.feature_extract as feature_extract
 import os
 
+#Tests to ensure that the rules for training comments are met
 class InputValidationTests(unittest.TestCase):
     def test_get_texts_requires_3_alphanum_word_input(self):
         sarc_comments, neg_comments = get_texts.read_file("tests.csv")
         self.assertEqual( 2,len(sarc_comments), "Sarcastic comments array length")
         self.assertEqual( 2,len(neg_comments), "Non-sarcastic comments array length")
 
+#Tests that an input with no real features doesnt give a sarcastic score
 class SarcasmScoreTest(unittest.TestCase):
     def test_one_word_run_sarcasm_input_isnt_positive(self):
         score = run_sarcasm.getSarcasmScore("a")
@@ -22,6 +24,7 @@ class SarcasmScoreTest(unittest.TestCase):
         score = run_sarcasm.getSarcasmScore("a a a a a a a a a a a a a a")
         self.assertGreater(1, score, "Doesn't define long input as sarcastic")
 
+#Test the topic modeller returns a topic, which is correct, and that the score is also correct
 class TopicModellerTest(unittest.TestCase):
     def test_topic_modeller(self):
         topic_mod = topic.topic(
@@ -34,6 +37,7 @@ class TopicModellerTest(unittest.TestCase):
         self.assertEqual(result[0], 177, "Topic is incorrect")
         self.assertAlmostEqual( 0.5025,result[1], places=4, msg="Topic score is incorrect")
 
+#Test preprocess replaces the correct things with the correct replacement
 class PreprocessTest(unittest.TestCase):
     def test_regular_replace1(self):
         sentence1="r u hahaha don't I'll"
@@ -51,7 +55,7 @@ class PreprocessTest(unittest.TestCase):
         sentence=":( :s :/"
         self.assertEqual("bad bad bad", prep.replace_emo(sentence), "Sad emoticon replacement wrong")
 
-
+#Test that the feature extract extracts the correct features from sentences
 class FeatureValidationTests(unittest.TestCase):
     def setUp(self):
         topic_mod = topic.topic(

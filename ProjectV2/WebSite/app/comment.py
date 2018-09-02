@@ -8,7 +8,6 @@ class Comment:
         self.split_text = text.split()
         self.blob = TextBlob(self.text)
         self.words = self.blob.words
-        #self.sentences = self.blob.sentences
 
     def __iter__(self):
         for i in range[0:len(self.split_text) - 1]:

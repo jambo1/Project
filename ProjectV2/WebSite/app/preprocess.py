@@ -29,13 +29,13 @@ emo_repl = {
     "yaaaay": "good",
     "yaaaaay": "good",
     #bademotions
-    ":/": " bad ",
+    ":/": "bad",
     ":&gt;": "sad",
     ":'(": "sad",
-    ":-(": " bad ",
-    ":(": " bad ",
-    ":s": " bad ",
-    ":-s": " bad "
+    ":-(": "bad",
+    ":(": "bad",
+    ":s": "bad",
+    ":-s": "bad"
 }
 
 # dictionnary for general (i.e. topic modeler)
@@ -80,7 +80,6 @@ re_repl = {
     r"\bcan't\b": "can not",
     r"\bcannot\b": "can not",
     r"\'ve\b": " have",
-    r"\n't\b": " not",
     r"\'ll\b": " will",
     r"\'re\b": " are",
 

@@ -1,8 +1,8 @@
 """ This class is a wrapper around the gensim LDA topic modeler. """
 
-from gensim import corpora, models
+from gensim import corpora, models, similarities
 import nltk
-import app.preprocess as preprocess
+import ProjectV2.preprocess as preprocess
 from nltk.corpus import stopwords
 
 #Class for building the topics
